@@ -78,6 +78,7 @@ setAs("SVs","data.frame",function(from, to){
 #' @export
 CNVsegs = setClass("CNVsegs",
 				   representation(
+						                  chromNames="character",
 								  chrom="character",
 								  start = "numeric",
 								  end="numeric",
@@ -91,9 +92,9 @@ setMethod("initialize", "CNVsegs", function(.Object, ...) {
 			  if(length(.Object@chrom) != length(.Object@start)|| length(.Object@chrom) != length(.Object@total_cn) || length(.Object@chrom) != length(.Object@end))
 				  stop("slots lengths are not all equal")
 			  .Object@numSegs = length(.Object@chrom)
-			  ind.match.cnv = match(.Object@chrom,chromNames)
+			  ind.match.cnv = match(.Object@chrom,.Object@chromNames)
 			  if(sum(is.na(ind.match.cnv))!=0){
-				  stop(paste("chromosome name must be in \"", paste(chromNames,collapse=" ")),"\"")
+				  stop(paste("chromosome name must be in \"", paste(.Object@chromNames,collapse=" ")),"\"")
 			  }
 
 			  .Object
