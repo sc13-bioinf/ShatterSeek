@@ -244,7 +244,7 @@ shatterseek = function(SV.sample,seg.sample,chromNames=c("1", "2", "3", "4", "5"
 	
 	out = chromoth(chromSummary=chromSummary,detail=chromothSample)
 	cat("Evaluating the statistical criteria\n")
-	out@chromSummary = statistical_criteria(out)
+	#out@chromSummary = statistical_criteria(out)
 	cat("Successfully finished!\n")
 	return(out)
 }
