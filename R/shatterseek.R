@@ -11,6 +11,7 @@
 
 SVs <- setClass("SVs",
 				representation(
+					                   chromNames="character",
 							   chrom1="character",
 							   pos1 = "numeric",
 							   chrom2 = "character",
@@ -40,11 +41,11 @@ setMethod("initialize", "SVs", function(.Object, ...) {
 				  .Object@pos1[ind] = tmp1
 			  }
 			  #.Object@numSV = length(.Object@chrom1)
-			  ind.match.sv1 = match(.Object@chrom1,chromNames)
-			  ind.match.sv2 = match(.Object@chrom2,chromNames)	
+			  ind.match.sv1 = match(.Object@chrom1,.Object@chromNames)
+			  ind.match.sv2 = match(.Object@chrom2,.Object@chromNames)
 
 			  if(sum(is.na(ind.match.sv1))!=0 | sum(is.na(ind.match.sv2))!=0){
-				  stop(paste("chromosome name must be in \"", paste(chromNames,collapse=" ")),"\"")
+				  stop(paste("chromosome name must be in \"", paste(.Object@chromNames,collapse=" ")),"\"")
 			  }
 
 			  .Object
