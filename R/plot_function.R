@@ -233,30 +233,7 @@ plot_chromothripsis <- function(ShatterSeek_output, chr=chr,BAF=NULL,sample_name
 								  axis.ticks=element_blank())
 
 
-	##chr_info = readRDS("/Users/isidro/Dropbox/Park_lab/paper_chromothripsis/chr_info.rds")
-	chr_info$color[chr_info$gieStain == "gneg"] = "white"
-	chr_info$color[chr_info$gieStain == "gpos25"] = "grey75"
-	chr_info$color[chr_info$gieStain == "gpos50"] = "grey50"
-	chr_info$color[chr_info$gieStain == "gpos75"] = "grey25"
-	chr_info$color[chr_info$gieStain == "gpos100"] = "grey0"
-	chr_info$color[chr_info$gieStain == "acen"] = "red"
-	chr_info = chr_info[chr_info$seqnames==chr,]
-	chr_info$y = rep(1,nrow(chr_info))
-
-	if(nrow(chr_info)<7){chr_info_annot=chr_info}else{
-	chr_info_annot=chr_info[seq(3,(nrow(chr_info)-3),3),]}
-
-	ideogram =ggplot(data=chr_info,aes(x=y,y=y)) +geom_point(colour="white")
-	ideogram = ideogram +  
-		geom_rect(data=chr_info,mapping = aes(xmin = chr_info$start, xmax = chr_info$end,   ymin = 0, ymax = 1),
-				  fill = chr_info$color,color="black",size=.1) 
-
-	ideogram = ideogram +ylim(0,4)
-	ideogram = ideogram + annotate(geom = "text",x = (chr_info_annot$start+chr_info_annot$end)/2,y=chr_info_annot$y + 1.2,
-								   label=chr_info_annot$name,vjust=.5, angle=90,size=2)
-	ideogram = ideogram +theme_bw() + common_ggplot2_chrom + #xlim(min_coord,max_coord) + 
-		scale_x_continuous(expand = c(0.01,0.01)) +
-		coord_cartesian(xlim=c(min_coord, max_coord))
+	ideogram = ggplot (data.frame(x=1:2,y=(1:2)^2)) + geom_point () + theme_bw()
 
 	#----------------------------------------------------------------------
 	# BAF
