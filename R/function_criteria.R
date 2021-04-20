@@ -1,4 +1,4 @@
-statistical_criteria = function(input){
+statistical_criteria = function(input,genome.mappability){
     summary <- data.frame(chrom =input@chromSummary$chrom)
     candidate_chrs <- input@chromSummary$chrom  
     # contains the IDs for the SVs that are in a cluster.
@@ -268,7 +268,7 @@ statistical_criteria = function(input){
 
         if(nb_SVs_cand !=0){
             nb_SVs_all_sample = nrow(SVsnow_exp) #input@detail$SV)
-            prob_cand = info_mappa$tot[which(info_mappa$V1 == cand)] / sum(as.numeric(info_mappa$tot))
+            prob_cand = genome.mappability$total[which(genome.mappability$chrom == cand)] / sum(genome.mappability$total)
             chr_enrich = binom.test(nb_SVs_cand,nb_SVs_all_sample,p=prob_cand)$p.val
             summary$chr_breakpoint_enrichment[index_chromosome] = chr_enrich} else {
             summary$chr_breakpoint_enrichment[index_chromosome] = NA

@@ -221,7 +221,7 @@ cluster.SV = function(SV.sample,min.Size=1,chromNames){
 #' @param seg.sample an instance of class CNVsegs
 #' @param min.Size minimum number of inleaved SVs required to report a cluster. Default is 1
 #' @export
-shatterseek = function(SV.sample,seg.sample,chromNames=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X"),min.Size=1){
+shatterseek = function(SV.sample,seg.sample,genome.mappability,chromNames=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X"),min.Size=1){
 
 	cat("Running..\n\n\n")
 	if(!is(SV.sample,"SVs")){stop("SV.sample must be a SVs object")}
@@ -244,7 +244,7 @@ shatterseek = function(SV.sample,seg.sample,chromNames=c("1", "2", "3", "4", "5"
 	
 	out = chromoth(chromSummary=chromSummary,detail=chromothSample)
 	cat("Evaluating the statistical criteria\n")
-	out@chromSummary = statistical_criteria(out)
+	out@chromSummary = statistical_criteria(out,genome.mappability)
 	cat("Successfully finished!\n")
 	return(out)
 }
