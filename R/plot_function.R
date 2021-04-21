@@ -232,18 +232,12 @@ plot_chromothripsis <- function(ShatterSeek_output, chr,ideogram_info,BAF=NULL,s
 								  plot.title=element_blank(), 
 								  axis.ticks=element_blank())
 
-
-	ideogram_info_labels <- ideogram_info %>%
-		mutate (spacing=round(((1:n ())+3) %% (n ()/7),digits=0)) %>%
-		filter (spacing==0) %>%
-		data.frame
-
 	ideogram = ggplot (ideogram_info) +
 	geom_rect (aes(xmin=start,xmax=end,ymin=0,ymax=1,fill=color)) +
 	scale_fill_identity () +
 	scale_y_continuous(expand = c(0,0)) +
 	scale_x_continuous(expand = c(0,0)) +
-	geom_text (data=ideogram_info_labels,aes(x=(start+end)/2,label=band),y=1.5,size=8) +
+	geom_text (data=ideogram_info %>% dplyr::filter (tick) %>% data.frame,aes(x=(start+end)/2,label=band),y=1.5,size=8) +
 	coord_cartesian (clip="off") +
 	theme_bw () +
 	theme(panel.grid.major = element_blank(),
