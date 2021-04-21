@@ -237,7 +237,7 @@ plot_chromothripsis <- function(ShatterSeek_output, chr,ideogram_info,BAF=NULL,s
 	scale_fill_identity () +
 	scale_y_continuous(expand = c(0,0)) +
 	scale_x_continuous(expand = c(0,0)) +
-	geom_text (data=ideogram_info %>% dplyr::filter (tick) %>% data.frame,aes(x=(start+end)/2,label=band),y=1.5,size=8) +
+	geom_text (data=ideogram_info %>% dplyr::filter (tick) %>% data.frame,aes(x=(start+end)/2,label=band),y=1.5,size=2) +
 	coord_cartesian (clip="off") +
 	theme_bw () +
 	theme(panel.grid.major = element_blank(),
@@ -247,7 +247,7 @@ plot_chromothripsis <- function(ShatterSeek_output, chr,ideogram_info,BAF=NULL,s
 	      axis.text=element_blank(),
 	      axis.title=element_blank(),
 	      axis.ticks=element_blank(),
-	      plot.margin=unit (c(2,0.2,0.2,0.2), "cm")
+	      plot.margin=unit (c(2,0.5,0.5,0), "cm")
 	)
 
 
