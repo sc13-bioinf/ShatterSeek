@@ -17,7 +17,8 @@
 plot_chromothripsis <- function(ShatterSeek_output, chr,ideogram_info,BAF=NULL,sample_name="",
 								DEL_color='darkorange1',DUP_color='blue1',
 								t2tINV_color="forestgreen",h2hINV_color="black",
-								arc_size=.2){
+								arc_size=.2,
+								chromNames=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X")){
 
 	if ( !(as.character(chr) %in% chromNames)){stop("Chromosome not valid")}
 
