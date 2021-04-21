@@ -14,7 +14,7 @@
 #' @return a list containing ggplot objects (chromosome ideogram, SVs, CN profile, and table with information about the region)
 #' 
 #' @export
-plot_chromothripsis <- function(ShatterSeek_output, chr=chr,BAF=NULL,sample_name="",
+plot_chromothripsis <- function(ShatterSeek_output, chr,ideogram_info,BAF=NULL,sample_name="",
 								DEL_color='darkorange1',DUP_color='blue1',
 								t2tINV_color="forestgreen",h2hINV_color="black",
 								arc_size=.2){
@@ -233,7 +233,29 @@ plot_chromothripsis <- function(ShatterSeek_output, chr=chr,BAF=NULL,sample_name
 								  axis.ticks=element_blank())
 
 
-	ideogram = ggplot (data.frame(x=1:2,y=(1:2)^2)) + geom_point () + theme_bw()
+	ideogram_info_labels <- ideogram_info %>%
+		mutate (spacing=round(((1:n ())+3) %% (n ()/7),digits=0)) %>%
+		filter (spacing==0) %>%
+		data.frame
+
+	ideogram = ggplot (ideogram_info) +
+	geom_rect (aes(xmin=start,xmax=end,ymin=0,ymax=1,fill=color)) +
+	scale_fill_identity () +
+	scale_y_continuous(expand = c(0,0)) +
+	scale_x_continuous(expand = c(0,0)) +
+	geom_text (data=ideogram_info_labels,aes(x=(start+end)/2,label=band),y=1.5,size=8) +
+	coord_cartesian (clip="off") +
+	theme_bw () +
+	theme(panel.grid.major = element_blank(),
+	      panel.grid.minor = element_blank(),
+	      panel.border = element_rect(colour = "black", fill=NA, size=0.5),
+	      plot.background = element_blank(),
+	      axis.text=element_blank(),
+	      axis.title=element_blank(),
+	      axis.ticks=element_blank(),
+	      plot.margin=unit (c(2,0.2,0.2,0.2), "cm")
+	)
+
 
 	#----------------------------------------------------------------------
 	# BAF
